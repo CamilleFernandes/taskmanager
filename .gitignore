@@ -2,3 +2,7 @@ target/
 .idea/ 
 *.class 
 *.log 
+# Segredos locais
+application-local.properties
+*.env
+.env
