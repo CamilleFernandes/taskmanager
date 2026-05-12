@@ -2,7 +2,6 @@ package com.seuprojeto.taskmanager.config;
 
 import com.seuprojeto.taskmanager.repository.UserRepository;
 import com.seuprojeto.taskmanager.security.JwtAuthenticationFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -28,7 +27,6 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserRepository userRepository;
 
-    // @Lazy resolve a dependência circular
     public SecurityConfig(@Lazy JwtAuthenticationFilter jwtAuthFilter,
                           UserRepository userRepository) {
         this.jwtAuthFilter = jwtAuthFilter;
@@ -45,6 +43,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PUBLIC_URLS).permitAll()
                         .anyRequest().authenticated()
