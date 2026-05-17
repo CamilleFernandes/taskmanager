@@ -27,6 +27,9 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: Dar permissao ao mvnw
+        run: chmod +x mvnw
+
       - name: Rodar testes
         run: ./mvnw test -Dspring.profiles.active=test
 
